@@ -3,10 +3,8 @@ kit PHP Whitelabel, versiuni PHP 7.0->8.x
 
 Cerinte minime server comerciant
 
-<ol>
-<li>PHP >= 7.0</li>
-<li>OpenSSL >= 1.0.1</li>
-<li>cURL >= 7.34.0</li>
-<li>extensia **php-curl** activa</li>
-<li>extensia **php-bcmath** activa</li>
-</ol>
+1. PHP >= 7.0
+2. OpenSSL >= 1.0.1
+3. cURL >= 7.34.0
+4. extensia **php-curl** activa
+5. extensia **php-bcmath** activa
