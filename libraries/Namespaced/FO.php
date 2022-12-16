@@ -48,7 +48,7 @@ class FO
         if (self::isError($post)) {
             return $post;
         } else {
-            return $this->MCCommunicate(self::$url_factura_noua, json_decode($post));
+            return $this->FOCommunicate(self::$url_factura_noua, json_decode($post));
         }
     }
 
@@ -60,7 +60,7 @@ class FO
         if (self::isError($post)) {
             return $post;
         } else {
-            return $this->MCCommunicate(self::$url_anuleaza_factura, json_decode($post));
+            return $this->FOCommunicate(self::$url_anuleaza_factura, json_decode($post));
         }
     }
 
@@ -209,7 +209,7 @@ class FO
         );
     }
 
-    private function MCCommunicate($url, $payload)
+    private function FOCommunicate($url, $payload)
     {
         $request = new Curl\Post($url, [
             'data' => $payload,
