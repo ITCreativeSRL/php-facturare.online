@@ -27,7 +27,7 @@ if (empty($vat_number)) {
     }
 } else {
     // persoana juridica
-    $cui = preg_replace( '/[^0-9]/', '', $vat_number );
+    $cui = preg_replace('/[^0-9]/', '', $vat_number);
     $atribut_fiscal = preg_replace('/[^a-z]/i', '', $vat_number);
 
     $vat = 0; // neplatitor de tva
@@ -130,7 +130,7 @@ $request['factura'] = array(
     'website' => str_replace('www.', '', $_SERVER['SERVER_NAME']),
     'curs_valutar' => round(1, 4), // 1- RON, curs valutar valuta/ron
     'zecimale' => (int)4, //int, cate zecimale se trimit la produsele de pe factura
-    'platita'      => (int)0, // int, daca factura e platita, daca nu e platita si compania e inrolata in sistemul de plata cu cardul se va genera link de plata in mediul LIVE si API e in mediul LIVE
+    'platita' => (int)0, // int, daca factura e platita, daca nu e platita si compania e inrolata in sistemul de plata cu cardul se va genera link de plata in mediul LIVE si API e in mediul LIVE
     // 'denumire_reducere'     	=> '',
     // 'valoare_reducere'      	=> (float)1.00,
     // 'dataora_expeditie'     	=> date('Y-m-d\TH:i:sP',strtotime('2017-09-29 01:59:58')),

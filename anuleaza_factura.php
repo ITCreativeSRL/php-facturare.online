@@ -1,4 +1,5 @@
 <?php
+
 namespace FacturareOnline;
 require_once('libraries/autoloader.php');
 
@@ -41,4 +42,3 @@ if ($fo::isJson($raspuns) === true) {
 } else {
     echo FO::response('', '02', 'The server response is not JSON');
 }
-?>

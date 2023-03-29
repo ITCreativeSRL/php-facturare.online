@@ -18,3 +18,29 @@ CREATE TABLE IF NOT EXISTS `facturareonline_facturi` (
 	KEY `orderid_invoiceid` ( `orderid`, `invoiceid` ),
 	KEY `orderid_status` ( `orderid`, `status` ) 
 ) ENGINE = INNODB DEFAULT CHARSET = utf8;
+
+CREATE TABLE IF NOT EXISTS `facturareonline_chitante` (
+    `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+    `receiptid` int(11) unsigned NOT NULL,
+    `invoiceid` int(11) unsigned NOT NULL,
+    `serie` varchar(255) NOT NULL,
+    `numar` int(3) unsigned NOT NULL,
+    `total` decimal(20,2) NOT NULL DEFAULT '0.00',
+    `moneda` char(3) NOT NULL DEFAULT 'RON',
+    `code` varchar(255) NOT NULL,
+    `document` mediumblob NOT NULL COMMENT 'document = max 16MB',
+    `created_on` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `receiptid_UNIQUE` (`receiptid`),
+    KEY `receiptid_invoiceid` (`receiptid`,`invoiceid`)
+) ENGINE = INNODB DEFAULT CHARSET = utf8;
+
+CREATE TABLE IF NOT EXISTS `facturareonline_incasari_banca` (
+    `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+    `invoiceid` int(11) unsigned NOT NULL,
+    `amount` decimal(20,2) NOT NULL,
+    `date` datetime NOT NULL,
+    `created_on` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (`id`),
+    KEY `invoiceid` (`invoiceid`)
+) ENGINE = INNODB DEFAULT CHARSET = utf8;

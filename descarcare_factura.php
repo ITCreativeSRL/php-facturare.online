@@ -1,4 +1,5 @@
 <?php
+
 namespace FacturareOnline;
 require_once('libraries/autoloader.php');
 
@@ -51,4 +52,3 @@ if (file_exists($file)) {
     unlink($file);
     exit;
 }
-?>

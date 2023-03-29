@@ -14,10 +14,19 @@ class FO
     private static $rsa_private;
     private static $iv;
     public static $loginid;
-    private static $url_factura_noua = 'https://facturare.online/api/adauga-factura';
+
+    // scheme validare
     private static $url_schema_factura_noua = 'https://facturare.online/static/validation/factura.json';
-    private static $url_anuleaza_factura = 'https://facturare.online/api/anuleaza-factura';
     private static $url_schema_anuleaza_factura = 'https://facturare.online/static/validation/anuleaza_factura.json';
+    private static $url_schema_genereaza_chitanta_factura = 'https://facturare.online/static/validation/genereaza_chitanta_factura.json';
+    private static $url_schema_incaseaza_banca_factura = 'https://facturare.online/static/validation/incaseaza_banca_factura.json';
+
+    // endpoint-uri
+    private static $url_factura_noua = 'https://facturare.online/api/adauga-factura';
+    private static $url_anuleaza_factura = 'https://facturare.online/api/anuleaza-factura';
+    private static $url_genereza_chitanta_factura = 'https://facturare.online/api/genereaza-chitanta-factura';
+    private static $url_incaseaza_banca_factura = 'https://facturare.online/api/incaseaza-banca-factura';
+
 
     public function __construct($loginid)
     {
@@ -61,6 +70,36 @@ class FO
             return $post;
         } else {
             return $this->FOCommunicate(self::$url_anuleaza_factura, json_decode($post));
+        }
+    }
+
+    public function genereazaChitantaFactura($invoiceid, $suma)
+    {
+        $request = [];
+        $request['invoiceid'] = $invoiceid;
+        $request['suma'] = (float)$suma;
+        $post = self::encryptMessageCompany($request, self::$url_schema_genereaza_chitanta_factura);
+        if (self::isError($post)) {
+            return $post;
+        } else {
+            return $this->FOCommunicate(self::$url_genereza_chitanta_factura, json_decode($post));
+        }
+    }
+
+    public function incaseazaBancaFactura($invoiceid, $suma, $data = null, $exchange_rate = 1)
+    {
+        $request = [];
+        $request['invoiceid'] = $invoiceid;
+        // suma va fi mereu in RON
+        $request['suma'] = round($suma * $exchange_rate, 2);
+        if (!empty($data)) {
+            $request['data'] = date('Y-m-d H:i:s', strtotime($data));
+        }
+        $post = self::encryptMessageCompany($request, self::$url_schema_incaseaza_banca_factura);
+        if (self::isError($post)) {
+            return $post;
+        } else {
+            return $this->FOCommunicate(self::$url_incaseaza_banca_factura, json_decode($post));
         }
     }
 
