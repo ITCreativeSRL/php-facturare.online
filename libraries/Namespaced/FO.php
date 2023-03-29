@@ -20,14 +20,12 @@ class FO
     private static $url_schema_anuleaza_factura = 'https://facturare.online/static/validation/anuleaza_factura.json';
     private static $url_schema_genereaza_chitanta_factura = 'https://facturare.online/static/validation/genereaza_chitanta_factura.json';
     private static $url_schema_incaseaza_banca_factura = 'https://facturare.online/static/validation/incaseaza_banca_factura.json';
-    private static $url_schema_fiscala_din_proforma = 'https://facturare.online/static/validation/fiscala_din_proforma.json';
 
     // endpoint-uri
     private static $url_factura_noua = 'https://facturare.online/api/adauga-factura';
     private static $url_anuleaza_factura = 'https://facturare.online/api/anuleaza-factura';
     private static $url_genereza_chitanta_factura = 'https://facturare.online/api/genereaza-chitanta-factura';
     private static $url_incaseaza_banca_factura = 'https://facturare.online/api/incaseaza-banca-factura';
-    private static $url_fiscala_din_proforma = 'https://facturare.online/api/fiscala-din-proforma';
 
 
     public function __construct($loginid)
@@ -102,16 +100,6 @@ class FO
             return $post;
         } else {
             return $this->FOCommunicate(self::$url_incaseaza_banca_factura, json_decode($post));
-        }
-    }
-
-    public function fiscala_din_proforma($request)
-    {
-        $post = self::encryptMessageCompany($request, self::$url_schema_fiscala_din_proforma);
-        if (self::isError($post)) {
-            return $post;
-        } else {
-            return $this->FOCommunicate(self::$url_fiscala_din_proforma, json_decode($post));
         }
     }
 
