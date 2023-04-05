@@ -225,16 +225,6 @@ class FO
         return $str;
     }
 
-    private static function getValidationSchema($url)
-    {
-        $request = new Curl\Get($url);
-        $request->send();
-        if ($request->getStatus() !== 200) {
-            throw new \Exception('Nu am putut obtine schema de validare de la FacturareOnline');
-        }
-        return $request->getResponse();
-    }
-
     public static function isJson($string)
     {
         if (is_object(json_decode($string))) {
